@@ -2,7 +2,7 @@ import React, { useState }from 'react'
 import {useNavigate} from 'react-router-dom'
 
 import {preview} from '../assets'
-import { getRandomPromt} from '../utils'
+import { getRandomPrompt} from '../utils'
 import { FormField, Loader} from '../components'
 
 
@@ -25,13 +25,13 @@ const handleSubmit = () => {
 
 }
 
-const handleChange = (e) => {
+const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
+const handleSurpriseMe = () => {
+  const randomPrompt = getRandomPrompt(form.prompt);
+  setForm({ ...form, prompt: randomPrompt });
 }
 
-const handleSurpriseMe = () =>{
-
-}
 
   return (
     <section className='max-w-7x1 mx-auto' >
@@ -42,24 +42,25 @@ const handleSurpriseMe = () =>{
 
     <form className='mt-16 max-w-3x1' onSubmit={handleSubmit}>
       <div className='="flex flex-col gap-5'>
+          <FormField
+          labelName="Your Name"
+          type="text"
+          name="name"
+          placeholder="Ex., john doe"
+          value={form.name}
+          handleChange={handleChange}
+        />
+
         <FormField
-         labelName="Your Name"
-         type='text'
-         name="name"
-         placeholder="jane doe"
-         value={form.name}
-         handleChange={handleChange}
-         />
-         <FormField
-         labelName="Promt name"
-         type='text'
-         name="name"
-         placeholder="Spongebob Squarepants in the Blair Witch Project"
-         value={form.name}
-         handleChange={handleChange}
-         isSurpriseMe
-         handleSurpriseMe
-         />
+          labelName="Prompt"
+          type="text"
+          name="prompt"
+          placeholder="An Impressionist oil painting of sunflowers in a purple vase…"
+          value={form.prompt}
+          handleChange={handleChange}
+          isSurpriseMe
+          handleSurpriseMe={handleSurpriseMe}
+        />
          <div className='relative bg-gray-50 border border-gray-300 
          text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
          w-64 p-3 h-64 flex justify-center items-center' >
