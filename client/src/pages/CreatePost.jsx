@@ -14,12 +14,36 @@ const [form, setForm] = useState({
   photo:'',
 })
 
-const[generatingImg, setgeneratingImg] = useState(false)
+const[generatingImg, setGeneratingImg] = useState(false)
 const[loading, setLoading] = useState(false)
 
-const generateImage = () =>{
+// ths fuction is calling the backend's generate fuction 
+const generateImage = async () => {
+  if (form.prompt) {
+    try {
+      setGeneratingImg(true);
+      const response = await fetch('http://localhost:8080/api/v1/dalle', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt: form.prompt,
+        }),
+      });
 
-}
+      const data = await response.json();
+      setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
+    } catch (err) {
+      alert(err);
+    } finally {
+      setGeneratingImg(false);
+    }
+  } else {
+    alert('Please provide proper prompt');
+  }
+};
+
 
 const handleSubmit = () => {
 
@@ -46,7 +70,7 @@ const handleSurpriseMe = () => {
           labelName="Your Name"
           type="text"
           name="name"
-          placeholder="Ex., john doe"
+          placeholder="Batman"
           value={form.name}
           handleChange={handleChange}
         />
@@ -55,7 +79,7 @@ const handleSurpriseMe = () => {
           labelName="Prompt"
           type="text"
           name="prompt"
-          placeholder="An Impressionist oil painting of sunflowers in a purple vase…"
+          placeholder="Spongebob Squarepants in the Blair Witch Project"
           value={form.prompt}
           handleChange={handleChange}
           isSurpriseMe
