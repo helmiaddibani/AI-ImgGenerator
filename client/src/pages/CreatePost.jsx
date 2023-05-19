@@ -140,14 +140,14 @@ const handleSurpriseMe = () => {
             {generatingImg ? 'Generating...' : "Generated"}
             </button>
       </div>
-      <div className='mt-10'>
-            <p className='mt-2 text-[#666e75] text-[14px]'>you can share your generated image</p>
+      <div className='mt-1'>
+            <p className='mt-2 text-[#666e75] text-[14px]'>Save your generated Image to our database (You can donwload it later)</p>
             <button
              type='submit'
-             className='mt-e text-white bg-[#6469ff] font-medium rounded-md
+             className='mt-2 text-white bg-[#6469ff] font-medium rounded-md
             text-sm w-full sm:w-auto px-5 py-2.5 text-center'
             >
-            {loading ? "Sharing..." : "Share" }
+            {loading ? "Sharing..." : "Save" }
             </button>
       </div>
     </form>

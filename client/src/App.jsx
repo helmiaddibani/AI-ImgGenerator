@@ -15,8 +15,8 @@ const App = () => {
         </Link>
 
         <Link to="/create-post" className='font-inter
-        font-medium bg-[#6469ff] text-white px-4 py-2 rounded-md'>
-        Create
+        font-medium bg-[#2087f4] text-white px-4 py-2 rounded-md'>
+        Generate Image
         </Link>
         </header>
         
